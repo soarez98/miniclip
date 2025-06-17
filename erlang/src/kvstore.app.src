@@ -1,0 +1,8 @@
+{application, kvstore,
+ [{description, "Key-Value Store Service"},
+  {vsn, "0.1.0"},
+  {registered, [kvstore_service, kvstore_sup]},
+  {mod, {kvstore_app, []}},
+  {applications, [kernel, stdlib, erlcloud, gpb]},
+  {env, []},
+  {modules, [kvstore_app, kvstore_sup, kvstore_service, kvstore_client, kvstore_pb]}]}.

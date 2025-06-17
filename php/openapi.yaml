@@ -1,0 +1,62 @@
+openapi: 3.0.3
+info:
+  title: PHP REST API SERVICE
+  version: 1.0.0
+paths:
+  /set:
+    post:
+      summary: Set a key-value pair
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                value:
+                  type: string
+              required: [key, value]
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    enum: [ok, internal]
+        '422':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /get/{key}:
+    get:
+      summary: Get a value by key
+      parameters:
+        - name: key
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    enum: [ok, not_found, internal]
+                  value:
+                    type: string
+                    nullable: true
+        '422':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
